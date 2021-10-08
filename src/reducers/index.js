@@ -9,7 +9,8 @@ import {
 export const initialState = {
     smurfs: [],
     isLoading: false,
-    error: ''
+    error: '',
+    errorMessage: ''
 }
 
 const reducer = (state = initialState, action) =>{
@@ -54,7 +55,7 @@ const reducer = (state = initialState, action) =>{
             return ({
                 ...state,
                 isLoading: false,
-                error: 'TEST'
+                errorMessage: `Error: Must fill in all fields including name`
             })
         default: 
             return state;

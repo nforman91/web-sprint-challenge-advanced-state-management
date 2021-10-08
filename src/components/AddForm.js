@@ -7,7 +7,7 @@ import {
 } from '../actions';
 
 const AddForm = (props) => {
-    const { error } = props;
+    const { error, errorMessage } = props;
 
     const [state, setState] = useState({
         name:"",
@@ -15,10 +15,6 @@ const AddForm = (props) => {
         nickname:"",
         description:""
     });
-
-    if(error){
-        return <h1>Must fill in all fields: {error}</h1>
-    }
 
     //remove when error state is added
     // const errorMessage = "";
@@ -33,10 +29,15 @@ const AddForm = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (state.name === "" || state.position === "" || state.nickname === "") {
-            return props.setError(error);
+            return props.setError(errorMessage);
             //add in error action
+        }else{
+            return props.addSmurf(state)
         }
-        return props.addSmurf(state)
+    }
+
+    if(error){
+        return <h1>{errorMessage}</h1>
     }
 
     return(<section>
@@ -59,7 +60,7 @@ const AddForm = (props) => {
                 <textarea onChange={handleChange} value={state.description} name="description" id="description" />
             </div>
             {
-                error && <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {error}</div>
+                errorMessage && <div data-testid="errorAlert" className="alert alert-danger" role="alert">{errorMessage}</div>
             }
             <button>Submit Smurf</button>
         </form>
@@ -70,7 +71,8 @@ const mapStateToProps = (state) => {
     return {
         smurfs: state.smurfs,
         isLoading: state.isLoading,
-        error: state.error
+        error: state.error,
+        errorMessage: state.errorMessage
     }
 }
 
