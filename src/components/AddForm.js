@@ -33,10 +33,10 @@ const AddForm = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (state.name === "" || state.position === "" || state.nickname === "") {
-            props.setError(error);
+            return props.setError(error);
             //add in error action
         }
-        props.addSmurf(state)
+        return props.addSmurf(state)
     }
 
     return(<section>

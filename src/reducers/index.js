@@ -46,7 +46,9 @@ const reducer = (state = initialState, action) =>{
                         nickname: action.payload.nickname,
                         description: action.payload.description
                     }
-                ]
+                ],
+                isLoading: false,
+                error: ''
             })
         case SET_ERROR:
             return ({
